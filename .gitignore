@@ -130,3 +130,21 @@ home:ec2-user/web/app/darknet/__init__\.py
 home:ec2-user/web/app/darknet/yolov2\.weights
 
 home:ec2-user/web/app/darknet/yolov3\.weights
+
+home:ec2-user/\.viminfo
+
+home:ec2-user/\.python_history
+
+home:ec2-user/\.hello2\.py\.swp
+
+home:ec2-user/\.bashrc
+
+home:ec2-user/\.bash_profile
+
+home:ec2-user/\.bash_logout
+
+home:ec2-user/\.bash_history
+
+home:ec2-user/web/\.flaskenv
+
+home:ec2-user/\.ssh/authorized_keys
