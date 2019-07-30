@@ -126,3 +126,7 @@ dmypy.json
 home:ec2-user/\.DS_Store
 
 home:ec2-user/web/app/darknet/__init__\.py
+
+home:ec2-user/web/app/darknet/yolov2\.weights
+
+home:ec2-user/web/app/darknet/yolov3\.weights
