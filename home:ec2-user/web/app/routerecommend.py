@@ -3,7 +3,6 @@
 import csv
 import math
 import io
-import re
 from operator import itemgetter
 
 
@@ -35,7 +34,12 @@ class RouteRecommend:
         self.name_array2=[]
         self.f = ''
         self.writer = ''
-        self.temp = ''
+        self.aw = ''
+        self.bc = ''
+        self.kw = ''
+        self.ce = ''
+        self.cf = ''
+        self.au = ''
     def main_route(self):
         self.keyword = io.open("/home/ec2-user/web/app/keyword.txt", "r", encoding="utf8")
 
@@ -73,6 +77,13 @@ class RouteRecommend:
         for au in range(len(self.Auditorium)):
             self.Auditorium[au] = self.Auditorium[au].strip()
 
+        self.Awing_count=0
+        self.B_Cwing_count=0
+        self.K_count=0
+        self.CentralBuilding_count=0
+        self.Caffe_count=0
+        self.Auditorium_count=0
+
         for element in self.chosenKeyword:
             if element in self.Awing_key:
                 self.Awing_count+=1
@@ -87,17 +98,84 @@ class RouteRecommend:
             elif element in self.K_key:
                 self.K_count+=1
         self.KeyWeight=[[self.Awing_count,'Awing'], [self.B_Cwing_count, 'B_Cwing'], [self.K_count, 'K'], [self.CentralBuilding_count, 'CentralBuilding'], [self.Caffe_count, 'Caffe'], [self.Auditorium_count, 'Auditorium']]
+        self.aw = self.KeyWeight[0]
+        self.bc = self.KeyWeight[1]
+        self.kw = self.KeyWeight[2]
+        self.ce = self.KeyWeight[3]
+        self.cf = self.KeyWeight[4]
+        self.au = self.KeyWeight[5]
         self.KeyWeight.reverse()
         self.KeyWeight.sort(key=itemgetter(0))
         self.KeyWeight.reverse()
-        self.name_array1=[]
-        self.name_array2=[]
+
+        if self.KeyWeight[0][1]=='Awing' and self.KeyWeight[1][1]=='B_Cwing':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.ce,self.kw,self.cf,self.au]
+        elif self.KeyWeight[0][1]=='Awing' and self.KeyWeight[1][1]=='K':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.bc,self.ce,self.cf,self.au]
+        elif self.KeyWeight[0][1]=='Awing' and self.KeyWeight[1][1]=='CentralBuilding':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.bc,self.kw,self.cf,self.au]
+        elif self.KeyWeight[0][1]=='Awing' and self.KeyWeight[1][1]=='Caffe':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.bc,self.ce,self.cf,self.au]
+        elif self.KeyWeight[0][1]=='Awing' and self.KeyWeight[1][1]=='Auditorium':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.cf,self.kw,self.ce,self.bc]
+        elif self.KeyWeight[0][1]=='B_Cwing' and self.KeyWeight[1][1]=='K':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.cf,self.au,self.ce,self.aw]
+        elif self.KeyWeight[0][1]=='B_Cwing' and self.KeyWeight[1][1]=='CentralBuilding':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.aw,self.kw,self.cf,self.au]
+        elif self.KeyWeight[0][1]=='B_Cwing' and self.KeyWeight[1][1]=='Caffe':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.kw,self.ce,self.aw,self.au]
+        elif self.KeyWeight[0][1]=='B_Cwing' and self.KeyWeight[1][1]=='Auditorium':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.cf,self.kw,self.ce,self.aw]
+        elif self.KeyWeight[0][1]=='K' and self.KeyWeight[1][1]=='CentralBuilding':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.aw,self.bc,self.cf,self.au]
+        elif self.KeyWeight[0][1]=='K' and self.KeyWeight[1][1]=='Caffe':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.au,self.ce,self.aw,self.bc]
+        elif self.KeyWeight[0][1]=='K' and self.KeyWeight[1][1]=='Auditorium':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.cf,self.ce,self.aw,self.bc]
+        elif self.KeyWeight[0][1]=='CentralBuilding' and self.KeyWeight[1][1]=='Caffe':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.au,self.kw,self.aw,self.bc]
+        elif self.KeyWeight[0][1]=='CentralBuilding' and self.KeyWeight[1][1]=='Auditorium':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.cf,self.kw,self.aw,self.bc]
+        elif self.KeyWeight[0][1]=='Caffe' and self.KeyWeight[1][1]=='Auditorium':
+            self.KeyWeight=[self.KeyWeight[0],self.KeyWeight[1],self.kw,self.ce,self.aw,self.bc]
+        elif self.KeyWeight[0][1]=='B_Cwing' and self.KeyWeight[1][1]=='Awing':
+            self.KeyWeight=[self.aw,self.bw,self.kw,self.ce,self.cf,self.au]
+        elif self.KeyWeight[0][1]=='K' and self.KeyWeight[1][1]=='Awing':
+            self.KeyWeight=[self.aw,self.bd,self.kw,self.ce,self.cf,self.au]
+        elif self.KeyWeight[0]=='CentralBuilding' and self.KeyWeight[1]=='Awing':
+            self.KeyWeight=[self.ce,self.aw,self.bc,self.kw,self.cf,self.au]
+        elif self.KeyWeight[0]=='Caffe' and self.KeyWeight[1]=='Awing':
+            self.KeyWeight=[self.cf,self.ce,self.aw,self.bc,self.kw,self.au]
+        elif self.KeyWeight[0]=='Auditorium' and self.KeyWeight[1]=='Awing':
+            self.KeyWeight=[self.au,self.aw,self.bc,self.ce,self.kw,self.cf]
+        elif self.KeyWeight[0]=='K' and self.KeyWeight[1]=='B_Cwing':
+            self.KeyWeight=[self.kw,self.bc,self.aw,self.ce,self.cf,self.au]
+        elif self.KeyWeight[0]=='CentralBuilding' and self.KeyWeight[1]=='B_Cwing':
+            self.KeyWeight=[self.ce,self.aw,self.bc,self.kw,self.cf,self.au]
+        elif self.KeyWeight[0]=='Caffe' and self.KeyWeight[1]=='B_Cwing':
+            self.KeyWeight=[self.cf,self.kw,self.bc,self.aw,self.ce,self.au]
+        elif self.KeyWeight[0]=='Auditorium' and self.KeyWeight[1]=='B_Cwing':
+            self.KeyWeight=[self.au,self.cf,self.kw,self.bc,self.aw,self.ce]
+        elif self.KeyWeight[0]=='CentralBuilding' and self.KeyWeight[1]=='K':
+            self.KeyWeight=[self.ce,self.kw,self.cf,self.au,self.aw,self.bc]
+        elif self.KeyWeight[0]=='Caffe' and self.KeyWeight[1]=='K':
+            self.KeyWeight=[self.cf,self.kw,self.ce,self.aw,self.bc,self.au]
+        elif self.KeyWeight[0]=='Auditorium' and self.KeyWeight[1]=='K':
+            self.KeyWeight=[self.au,self.cf,self.kw,self.bc,self.aw,self.ce]
+        elif self.KeyWeight[0]=='Caffe' and self.KeyWeight[1]=='CentralBuilding':
+            self.KeyWeight=[self.cf,self.ce,self.aw,self.bc,self.kw,self.au]
+        elif self.KeyWeight[0]=='Auditorium' and self.KeyWeight[1]=='CentralBuilding':
+            self.KeyWeight=[self.au,self.cf,self.kw,self.ce,self.aw,self.bc]
+        elif self.KeyWeight[0]=='Auditorium' and self.KeyWeight[1]=='Caffe':
+            self.KeyWeight=[self.au,self.cf,self.kw,self.ce,self.aw,self.bc]
+
+        self.name_array1 = []
         for k in self.KeyWeight:
             self.name_array1.append(k)
-    
+        
+        self.name_array2 = []
         for j in self.name_array1:
-            self.temp = re.sub(r'[^\w]', '', j[1])
-            self.name_array2.append(self.temp)
+            self.name_array2.append(j[1])
         self.f = open('/home/ec2-user/web/app/route.csv', 'w')
         self.writer = csv.writer(self.f, lineterminator='\n')
         self.writer.writerow(self.name_array2)

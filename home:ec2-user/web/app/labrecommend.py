@@ -22,6 +22,7 @@ class LabRecommend:
 		for i in range(len(self.content)):
 			self.content[i] = self.content[i].strip()
 		
+		self.input_line = []
 		for k in range(24):
 			self.input_line.append('null')
 		for h in range(len(self.content)):
