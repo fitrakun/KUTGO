@@ -14,11 +14,13 @@ from scp import SCPClient
 import shutil
 
 class GoRoom:
+    # initiate global variable
     number_of_people = 1
     command ='cd /home/ec2-user/web/app/darknet/ && /home/ec2-user/web/app/darknet/darknet detect cfg/yolov2.cfg /home/ec2-user/web/app/darknet/yolov2.weights room/test.jpg | grep person | wc -l'
     proc = ''
     t=''
     def __init__(self):
+        # initiate private variable
         # self.HOST = '172.21.39.121'
         # self.PORT = "22"
         # self.USER = 'pi'
@@ -32,6 +34,7 @@ class GoRoom:
 
     def main_goroom(self):
         print('---------------detect object!------YOLOOOOOOhh!----------------')
+        # run the command by subprocess
         GoRoom.proc = subprocess.Popen('cd /home/ec2-user/web/app/darknet/ && ~/web/app/darknet/darknet detect ~/web/app/darknet/cfg/yolov2.cfg yolov2.weights ~/web/app/darknet/room/roomA309.jpg | grep person | wc -l',shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         # os.system('cd /home/ec2-user/web/app/darknet/ && ~/web/app/darknet/darknet detect ~/web/app/darknet/cfg/yolov2.cfg yolov2.weights ~/web/app/darknet/room/test.jpg')
         #return value(stdout_data) is number of people

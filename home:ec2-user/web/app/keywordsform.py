@@ -7,6 +7,7 @@ from flask_wtf import FlaskForm
 from wtforms import BooleanField
 
 class KeywordsForm(FlaskForm):
+	# initiate the variable of the checklist
 	information = BooleanField('Information')
 	computer = BooleanField('Computer')
 	ai = BooleanField('AI')
@@ -23,5 +24,6 @@ class KeywordsForm(FlaskForm):
 	office = BooleanField('Office')
 	application = BooleanField('Application')
 	def reset(self):
+		# use the csrf for blankdata
 		blankData = MultiDict([ ('csrf', self.reset_csrf() ) ])
 		self.process(blankData)
