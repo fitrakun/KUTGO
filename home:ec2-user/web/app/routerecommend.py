@@ -1,3 +1,7 @@
+# Code written by Noda
+# Transform into CLASS by Fitra
+# Function    : to find the best route based on the keyword and priority
+# Output      : list of buildings
 # -*- coding: utf-8 -*-
 
 import csv

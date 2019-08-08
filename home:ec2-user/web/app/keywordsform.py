@@ -1,3 +1,8 @@
+# This file is not used for the main program. Only sample code
+# Code written by Fitra
+# Function    : to save the form of keyword
+# Output      : reset data of flask form
+
 from flask_wtf import FlaskForm
 from wtforms import BooleanField
 

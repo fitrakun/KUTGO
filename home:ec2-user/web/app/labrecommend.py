@@ -1,3 +1,8 @@
+# Normal python code written by Kanji
+# Transform into CLASS by Fitra
+# Function    : to find the recommended lab based on the lab data and input by user
+# Output      : lab recommendation data
+
 import csv
 import pandas as pd
 import sys

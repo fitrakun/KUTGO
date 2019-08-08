@@ -1,3 +1,7 @@
+# Code written by Yasuhiro
+# Transform into CLASS by Fitra
+# Function    : to run the darknet app and count number of people from image taken
+# Output      : number of people in a room
 import subprocess
 import os
 import cv2

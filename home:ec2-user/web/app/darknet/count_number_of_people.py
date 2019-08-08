@@ -1,3 +1,6 @@
+# Code written by Yasuhiro
+# Function    : to run the darknet app and count number of people from image taken
+# Output      : number of people in a room
 import subprocess
 import os
 import subprocess

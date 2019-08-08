@@ -1,3 +1,6 @@
+# Code written by Fitra
+# Function    : to make the route of the website
+# Output      : route of every pages
 from app import app
 from flask import Flask, render_template, flash, redirect, request, url_for, send_from_directory
 from app.darknet.goroom import GoRoom

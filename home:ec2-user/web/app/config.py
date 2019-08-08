@@ -1,3 +1,7 @@
+# Code written by Fitra
+# Function    : to save the config of secret key
+# Output      : secret key
+
 import os
 
 class Config(object):
